@@ -1,0 +1,38 @@
+header {
+  position: fixed;
+  width: 100%;
+  transition: 0.5s;
+  z-index: 10000;
+}
+
+.banner {
+  background-color: #000;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.lnb {
+  width: 1300px;
+  margin: auto;
+  text-align: right;
+}
+
+.lnb a {
+  color: #ddd;
+  margin: 10px;
+}
+
+nav {
+  width: 1300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+nav span {
+  font-size: 48px;
+}
