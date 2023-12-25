@@ -15,6 +15,12 @@ export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
     setInputValue(e.target.value);
   };
 
+  const inputKeyDownHandler = (e) => {
+    if (e.key === "Enter") {
+      searchButtonHandler();
+    }
+  };
+
   const isInputValid = (value) => {
     let isValid = true;
 
@@ -35,6 +41,7 @@ export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
   const searchButtonHandler = () => {
     const isValid = isInputValid(inputValue);
     setIsValidLotteryNumber(isValid);
+    setInputValue("");
 
     if (isValid) {
       onFetchData(inputValue);
@@ -52,6 +59,7 @@ export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
           max={currentWeek}
           maxLength={4}
           onChange={inputChangeHandler}
+          onKeyDown={inputKeyDownHandler}
           value={inputValue}
           placeholder={placeholderText}
         />
