@@ -78,10 +78,12 @@ export default function Main() {
           data && data.returnValue === "success" ? data : null
         )}
         <PastTenDrawsViewer onFetchData={fetchData} currentWeek={currentWeek} />
-        <LotteryNumberDisplay />
         <div className={styles["button-container"]}>
-          <button>당첨돼보기</button>
+          <button>당첨 돼보기</button>
         </div>
+        <LotteryNumberDisplay
+          data={data && data.returnValue === "success" ? data : null}
+        />
       </section>
     </main>
   );

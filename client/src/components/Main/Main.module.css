@@ -1,5 +1,5 @@
 main {
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -32,6 +32,14 @@ nav h1 {
 
 .button-container {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container button {
+  padding: 20px;
+  font-size: 48px;
 }
 
 @media (max-width: 1300px) {
@@ -45,8 +53,16 @@ nav h1 {
 }
 
 @media (max-width: 768px) {
+  main {
+    height: auto;
+  }
+
   nav h1 {
     font-size: 24px;
     text-align: center;
+  }
+
+  .button-container button {
+    font-size: 32px;
   }
 }
