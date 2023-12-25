@@ -1,9 +1,48 @@
-// import DhLotteryApi from "../../api/DhLotteryApi";
+import { useEffect, useState } from "react";
+
+import DhLotteryApi from "../../api/DhLotteryApi";
+import calCurrentWeek from "../../util/calCurrentWeek";
 
 import styles from "./Main.module.css";
+import PastTenDrawsViewer from "./PastTenDrawsViewer";
+import LotteryNumberDisplay from "./LotteryNumberDisplay";
 
 export default function Main() {
-  // DhLotteryApi(10);
+  const [data, setData] = useState({
+    drwNo: 0,
+    drwNoDate: "2023-06-18",
+    drwtNo1: 1,
+    drwtNo2: 2,
+    drwtNo3: 3,
+    drwtNo4: 4,
+    drwtNo5: 5,
+    drwtNo6: 6,
+    bnusNo: 7,
+  });
+  useEffect(() => {
+    const fetchData = async (num) => {
+      try {
+        const result = await DhLotteryApi(num);
+        setData((prevData) => ({
+          ...prevData,
+          drwNo: result.drwNo,
+          drwNoDate: result.drwNoDate,
+          drwtNo1: result.drwtNo1,
+          drwtNo2: result.drwtNo2,
+          drwtNo3: result.drwtNo3,
+          drwtNo4: result.drwtNo4,
+          drwtNo5: result.drwtNo5,
+          drwtNo6: result.drwtNo6,
+          bnusNo: result.bnusNo,
+        }));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const currentWeek = calCurrentWeek();
+    fetchData(currentWeek);
+  }, []);
 
   return (
     <main>
@@ -28,6 +67,12 @@ export default function Main() {
 
         
         */}
+        {console.log("화면 : ", data ?? null)}
+        <PastTenDrawsViewer />
+        <LotteryNumberDisplay />
+        <div className={styles["button-container"]}>
+          <button>당첨되보기</button>
+        </div>
       </section>
     </main>
   );

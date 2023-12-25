@@ -28,6 +28,12 @@ nav h1 {
   margin: auto;
   height: 75%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container {
+  flex: 1;
 }
 
 @media (max-width: 1300px) {
