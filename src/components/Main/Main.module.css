@@ -1,3 +1,48 @@
 main {
   height: 100vh;
+  background: url(../../assets/images/money.jpg) no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+nav {
+  width: 1300px;
+  margin: auto;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddd;
+  height: 80px;
+}
+
+nav h1 {
+  font-size: 40px;
+}
+
+.lottery-draw {
+  background-color: #ddd;
+  width: 1300px;
+  margin: auto;
+  height: 75%;
+  display: flex;
+}
+
+@media (max-width: 1300px) {
+  nav {
+    width: 100%;
+  }
+
+  .lottery-draw {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav h1 {
+    font-size: 24px;
+    text-align: center;
+  }
 }

@@ -10,9 +10,6 @@ export default function Header() {
           <a href="#none">인스타?</a>
         </div>
       </div>
-      <nav>
-        <span>나는 복권 1등할려면 몇장을 샀어야했나</span>
-      </nav>
     </header>
   );
 }
