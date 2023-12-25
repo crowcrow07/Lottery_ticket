@@ -1,3 +1,54 @@
 .container {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container h2 {
+  font-size: 30px;
+  margin: 10px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  width: 768px;
+}
+
+.input-container input {
+  padding: 4px;
+  width: 50%;
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+.input-container button {
+  padding: 4px;
+  width: 20%;
+  font-size: 24px;
+}
+
+.container span {
+  margin: 10px;
+}
+
+.redText {
+  color: red;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .input-container {
+    width: 80%;
+  }
+
+  .input-container input {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .input-container button {
+    width: 50%;
+  }
 }
