@@ -44,6 +44,7 @@ export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
     setInputValue("");
 
     if (isValid) {
+      setInfoText(`현재 1부터 ${currentWeek}까지 조회 가능`);
       onFetchData(inputValue);
     }
   };
