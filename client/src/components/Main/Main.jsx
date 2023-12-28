@@ -7,10 +7,12 @@ import styles from "./Main.module.css";
 import LotteryNumberSearch from "./LotteryNumberSearch";
 import LotteryNumberDisplay from "./LotteryNumberDisplay";
 import { checkWinningNumbersWorker } from "../../util/util.worker";
+import WinCheckButton from "./WinCheckButton";
 
 const initialData = {
   drwNo: 0,
   drwNoDate: "2023-06-18",
+  firstAccumamnt: 0,
   drwtNo1: 1,
   drwtNo2: 2,
   drwtNo3: 3,
@@ -33,6 +35,7 @@ export default function Main() {
         ...prevData,
         drwNo: result.drwNo,
         drwNoDate: result.drwNoDate,
+        firstAccumamnt: result.firstAccumamnt,
         drwtNo1: result.drwtNo1,
         drwtNo2: result.drwtNo2,
         drwtNo3: result.drwtNo3,
@@ -89,7 +92,28 @@ export default function Main() {
         <h1>나는 복권 1등할려면 몇장을 샀어야했나</h1>
       </nav>
       <section className={styles["lottery-draw"]}>
-        {/* 
+        {/* {console.log(
+          "화면 : ",
+          data && data.returnValue === "success" ? data : null
+        )} */}
+        <LotteryNumberSearch
+          onFetchData={fetchData}
+          currentWeek={currentWeek}
+        />
+        <WinCheckButton
+          isCalOver={isCalOver}
+          winningButtonHandler={winningButtonHandler}
+        />
+        <LotteryNumberDisplay
+          data={data && data.returnValue === "success" ? data : null}
+          attempt={attempt ?? null}
+        />
+      </section>
+    </main>
+  );
+}
+
+/* 
         https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+number
         조회하기 -> dropdown 형식으로? 처음부터 끝까지 보여주기 보다는 최근부터 10회 전까지만 불러오기 / 조회하기 버튼
         밑에 자그만한게 설명 (최신 회차에서 10주전까지의 기록을 조회합니다.)
@@ -102,31 +126,4 @@ export default function Main() {
         공유 버튼 : 인스타 스토리 공유, 카카오톡 공유, 클립보드 복사버튼
 일주일마다 한번 api를 호출하는 번호를 + 1 하면 될듯
                 
-        */}
-
-        {/* {console.log(
-          "화면 : ",
-          data && data.returnValue === "success" ? data : null
-        )} */}
-        <LotteryNumberSearch
-          onFetchData={fetchData}
-          currentWeek={currentWeek}
-        />
-        <div className={`${styles["button-container"]}`}>
-          <button
-            className={isCalOver && styles.disabled}
-            type="button"
-            onClick={winningButtonHandler}
-            disabled={isCalOver}
-          >
-            {!isCalOver ? "당첨 돼보기" : "계산중..."}
-          </button>
-        </div>
-        <LotteryNumberDisplay
-          data={data && data.returnValue === "success" ? data : null}
-          attempt={attempt ?? null}
-        />
-      </section>
-    </main>
-  );
-}
+        */
