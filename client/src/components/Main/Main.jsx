@@ -28,6 +28,8 @@ export default function Main() {
   const [isCalOver, setIsCalOver] = useState(false);
   const [attempt, setAttempt] = useState(null);
 
+  const currentWeek = calCurrentWeek();
+
   const fetchData = async (num) => {
     try {
       const result = await DhLotteryApi(num);
@@ -51,9 +53,8 @@ export default function Main() {
     }
   };
 
-  const currentWeek = calCurrentWeek();
-
   useEffect(() => {
+    console.log("실행됨", currentWeek);
     fetchData(currentWeek);
   }, [currentWeek]);
 
