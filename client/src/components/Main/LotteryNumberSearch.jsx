@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "./PastTenDrawsViewer.module.css";
+import styles from "./LotteryNumberSearch.module.css";
 
-export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
+export default function LotteryNumberSearch({ onFetchData, currentWeek }) {
   const [inputValue, setInputValue] = useState("");
   const [isValidLotteryNumber, setIsValidLotteryNumber] = useState(true);
   const [infoText, setInfoText] = useState(
@@ -53,7 +53,7 @@ export default function PastTenDrawsViewer({ onFetchData, currentWeek }) {
 
   return (
     <div className={styles.container}>
-      <h2>복권번호 조회</h2>
+      <h2>복권 번호 회차 검색</h2>
       <div className={styles["input-container"]}>
         <input
           min={1}
