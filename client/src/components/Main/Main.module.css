@@ -42,6 +42,10 @@ nav h1 {
   font-size: 48px;
 }
 
+.button-container button.disabled {
+  cursor: not-allowed;
+}
+
 @media (max-width: 1300px) {
   nav {
     width: 100%;
