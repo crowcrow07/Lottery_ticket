@@ -55,7 +55,6 @@ export default function Main() {
   };
 
   useEffect(() => {
-    console.log("실행됨", currentWeek);
     fetchData(currentWeek);
   }, [currentWeek]);
 
