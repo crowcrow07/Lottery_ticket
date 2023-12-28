@@ -30,22 +30,6 @@ nav h1 {
   align-items: center;
 }
 
-.button-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-container button {
-  padding: 20px;
-  font-size: 48px;
-}
-
-.button-container button.disabled {
-  cursor: not-allowed;
-}
-
 @media (max-width: 1300px) {
   nav {
     width: 100%;
@@ -64,9 +48,5 @@ nav h1 {
   nav h1 {
     font-size: 24px;
     text-align: center;
-  }
-
-  .button-container button {
-    font-size: 32px;
   }
 }
