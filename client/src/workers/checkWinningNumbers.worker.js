@@ -36,6 +36,7 @@ function generateLotteryNumbers() {
   return lotteryNumbers;
 }
 
+// export default function checkWinningNumbers(targetNumbers) {
 self.onmessage = ({ data }) => {
   let attempts = 0;
 
