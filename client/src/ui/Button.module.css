@@ -1,0 +1,8 @@
+.button {
+  padding: 2rem 3.5rem;
+  font-size: 1.5rem;
+}
+
+button.disabled {
+  cursor: not-allowed;
+}
