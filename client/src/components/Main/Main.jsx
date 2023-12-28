@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
+import LotteryNumberSearch from "./LotteryNumberSearch";
+import WinCheckButton from "./WinCheckButton";
+import LotteryNumberDisplay from "./LotteryNumberDisplay";
+
 import DhLotteryApi from "../../api/DhLotteryApi";
 import calCurrentWeek from "../../util/calCurrentWeek";
+import { checkWinningNumbersWorker } from "../../util/util.worker";
 
 import styles from "./Main.module.css";
-import LotteryNumberSearch from "./LotteryNumberSearch";
-import LotteryNumberDisplay from "./LotteryNumberDisplay";
-import { checkWinningNumbersWorker } from "../../util/util.worker";
-import WinCheckButton from "./WinCheckButton";
 
 const initialData = {
   drwNo: 0,
