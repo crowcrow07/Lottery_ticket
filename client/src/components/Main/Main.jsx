@@ -4,8 +4,9 @@ import DhLotteryApi from "../../api/DhLotteryApi";
 import calCurrentWeek from "../../util/calCurrentWeek";
 
 import styles from "./Main.module.css";
-import PastTenDrawsViewer from "./PastTenDrawsViewer";
+import LotteryNumberSearch from "./LotteryNumberSearch";
 import LotteryNumberDisplay from "./LotteryNumberDisplay";
+import { checkWinningNumbersWorker } from "../../util/util.worker";
 
 const initialData = {
   drwNo: 0,
@@ -22,6 +23,8 @@ const initialData = {
 
 export default function Main() {
   const [data, setData] = useState(initialData);
+  const [isCalOver, setIsCalOver] = useState(false);
+  const [attempt, setAttempt] = useState(null);
 
   const fetchData = async (num) => {
     try {
@@ -39,6 +42,7 @@ export default function Main() {
         bnusNo: result.bnusNo,
         returnValue: result.returnValue,
       }));
+      setAttempt(null);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -49,6 +53,35 @@ export default function Main() {
   useEffect(() => {
     fetchData(currentWeek);
   }, [currentWeek]);
+
+  const winningButtonHandler = () => {
+    setIsCalOver(true);
+
+    const dhLottoNumArr = [
+      data.drwtNo1,
+      data.drwtNo2,
+      data.drwtNo3,
+      data.drwtNo4,
+      data.drwtNo5,
+      data.drwtNo6,
+      data.bnusNo,
+    ];
+
+    // 웹 워커에서 한 번만 이벤트 핸들러 등록
+    checkWinningNumbersWorker.onmessage = ({ data }) => {
+      const attempts = data;
+      setAttempt(attempts);
+
+      // 작업이 완료된 후 다시 메시지를 받지 않도록 이벤트 핸들러 제거
+      // checkWinningNumbersWorker.onmessage = null;
+
+      // 모든 작업이 완료되었으므로 setIsCalOver(false) 호출
+      setIsCalOver(false);
+    };
+
+    // 웹 워커에 메시지 전송
+    checkWinningNumbersWorker.postMessage(dhLottoNumArr);
+  };
 
   return (
     <main>
@@ -68,21 +101,30 @@ export default function Main() {
         -> 이번 number 회차의 복권에서 당신은 총 number 개의 복권을 사야했으며 number 원을 투자했어야 했습니다.
         공유 버튼 : 인스타 스토리 공유, 카카오톡 공유, 클립보드 복사버튼
 일주일마다 한번 api를 호출하는 번호를 + 1 하면 될듯
-        
-
-
-        
+                
         */}
-        {console.log(
+
+        {/* {console.log(
           "화면 : ",
           data && data.returnValue === "success" ? data : null
-        )}
-        <PastTenDrawsViewer onFetchData={fetchData} currentWeek={currentWeek} />
-        <div className={styles["button-container"]}>
-          <button>당첨 돼보기</button>
+        )} */}
+        <LotteryNumberSearch
+          onFetchData={fetchData}
+          currentWeek={currentWeek}
+        />
+        <div className={`${styles["button-container"]}`}>
+          <button
+            className={isCalOver && styles.disabled}
+            type="button"
+            onClick={winningButtonHandler}
+            disabled={isCalOver}
+          >
+            {!isCalOver ? "당첨 돼보기" : "계산중..."}
+          </button>
         </div>
         <LotteryNumberDisplay
           data={data && data.returnValue === "success" ? data : null}
+          attempt={attempt ?? null}
         />
       </section>
     </main>
