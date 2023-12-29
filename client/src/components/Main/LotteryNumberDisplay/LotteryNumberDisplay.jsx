@@ -1,4 +1,4 @@
-import numberToKorean from "../../util/numberToKorean";
+import numberToKorean from "../../../util/numberToKorean";
 
 import styles from "./LotteryNumberDisplay.module.css";
 

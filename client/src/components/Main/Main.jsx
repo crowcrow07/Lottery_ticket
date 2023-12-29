@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import LotteryNumberSearch from "./LotteryNumberSearch";
-import WinCheckButton from "./WinCheckButton";
-import LotteryNumberDisplay from "./LotteryNumberDisplay";
+import LotteryNumberSearch from "./LotteryNumberSearch/LotteryNumberSearch";
+import WinCheckButton from "./WinCheckButton/WinCheckButton";
+import LotteryNumberDisplay from "./LotteryNumberDisplay/LotteryNumberDisplay";
 
 import DhLotteryApi from "../../api/DhLotteryApi";
 import calCurrentWeek from "../../util/calCurrentWeek";
@@ -86,18 +86,28 @@ export default function Main() {
         <h1>나는 복권 1등할려면 몇장을 샀어야했나</h1>
       </nav>
       <section className={styles["lottery-draw"]}>
-        <LotteryNumberSearch
-          onFetchData={fetchData}
-          currentWeek={currentWeek}
-        />
-        <WinCheckButton
-          isCalOver={isCalOver}
-          winningButtonHandler={winningButtonHandler}
-        />
-        <LotteryNumberDisplay
-          data={data && data.returnValue === "success" ? data : null}
-          attempt={attempt ?? null}
-        />
+        {!isCalOver ? (
+          attempt ? (
+            <div>계산 완료</div>
+          ) : (
+            <>
+              <LotteryNumberSearch
+                onFetchData={fetchData}
+                currentWeek={currentWeek}
+              />
+              <WinCheckButton
+                isCalOver={isCalOver}
+                winningButtonHandler={winningButtonHandler}
+              />
+              <LotteryNumberDisplay
+                data={data && data.returnValue === "success" ? data : null}
+                attempt={attempt ?? null}
+              />
+            </>
+          )
+        ) : (
+          <div>로딩중</div>
+        )}
       </section>
     </main>
   );
